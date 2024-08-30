@@ -1,40 +1,34 @@
-#ifndef SOUNDEX_H
-#define SOUNDEX_H
-
-#include "Soundex.h"
+#include "soundex.h"
 #include <ctype.h>
 #include <string.h>
 
-char getSoundexCode(char c) {
-    c = toupper(c);
-    switch (c) {
-        case 'B': case 'F': case 'P': case 'V': return '1';
-        case 'C': case 'G': case 'J': case 'K': case 'Q': case 'S': case 'X': case 'Z': return '2';
-        case 'D': case 'T': return '3';
-        case 'L': return '4';
-        case 'M': case 'N': return '5';
-        case 'R': return '6';
-        default: return '0'; // For A, E, I, O, U, H, W, Y
+// Mapping of characters to Soundex digits
+static const char *soundex_map = "012301200400000502030014051100300000700000";
+
+void soundex(const char *input, char *output) {
+    if (input == NULL || output == NULL) {
+        return;
     }
-}
 
-void generateSoundex(const char *name, char *soundex) {
-    int len = strlen(name);
-    soundex[0] = toupper(name[0]);
-    int sIndex = 1;
-
-    for (int i = 1; i < len && sIndex < 4; i++) {
-        char code = getSoundexCode(name[i]);
-        if (code != '0' && code != soundex[sIndex - 1]) {
-            soundex[sIndex++] = code;
+    // Convert the first letter of the input to uppercase
+    output[0] = toupper(input[0]);
+    
+    int previous_digit = -1;
+    int j = 1;
+    for (int i = 1; input[i] != '\0' && j < 4; ++i) {
+        char c = toupper(input[i]);
+        if (c >= 'A' && c <= 'Z') {
+            int index = c - 'A';
+            int digit = soundex_map[index] - '0';
+            if (digit != previous_digit && digit != 0) {
+                output[j++] = '0' + digit;
+                previous_digit = digit;
+            }
         }
     }
-
-    while (sIndex < 4) {
-        soundex[sIndex++] = '0';
+    // Pad the output with zeros if necessary
+    while (j < 4) {
+        output[j++] = '0';
     }
-
-    soundex[4] = '\0';
+    output[4] = '\0';
 }
-
-#endif // SOUNDEX_H
