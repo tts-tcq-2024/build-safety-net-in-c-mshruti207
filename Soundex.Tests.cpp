@@ -1,6 +1,6 @@
 #include <check.h>
 #include <string.h>
-#include "soundex.h"
+#include "Soundex.h"
 
 // Test case for the Soundex algorithm
 START_TEST(test_soundex_basic) {
