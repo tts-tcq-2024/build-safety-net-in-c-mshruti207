@@ -14,7 +14,3 @@ bool IsPrime(int n) {
   if (n % 2 == 0) return n == 2;
 
    }
-
-  // n has no integer factor in the range (1, n), and thus is prime.
-  return true;
-}
