@@ -1,21 +1,21 @@
-#include <check.h>
-#include <string.h>
+#include <gtest/gtest.h>
 #include "Soundex.h"
+
 
 // Test case for the Soundex algorithm
 START_TEST(test_soundex_basic) {
     char output[5];
 
     soundex("Smith", output);
-    ck_assert_str_eq(output, "S530");
+    ASSERT_EQ(output, "S530");
 
     soundex("Jackson", output);
-    ck_assert_str_eq(output, "J025");
+    ASSERT_EQ(output, "J025");
 
     soundex("Robert", output);
-    ck_assert_str_eq(output, "R163");
+    ASSERT_EQ(output, "R163");
 }
-END_TEST
+
 
 START_TEST(test_soundex_edge_cases) {
     char output[5];
