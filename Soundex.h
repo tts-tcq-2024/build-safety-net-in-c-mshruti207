@@ -1,34 +1,33 @@
-#include "Soundex.h"
-#include <ctype.h>
-#include <string.h>
+// Returns n! (the factorial of n).  For negative n, n! is defined to be 1.
+int Factorial(int n) {
+  int result = 1;
+  for (int i = 1; i <= n; i++) {
+    result *= i;
+  }
 
-// Mapping of characters to Soundex digits
-static const char *soundex_map = "012301200400000502030014051100300000700000";
+  return result;
+}
 
-void soundex(const char *input, char *output) {
-    if (input == NULL || output == NULL) {
-        return;
-    }
+// Returns true if and only if n is a prime number.
+bool IsPrime(int n) {
+  // Trivial case 1: small numbers
+  if (n <= 1) return false;
 
-    // Convert the first letter of the input to uppercase
-    output[0] = toupper(input[0]);
-    
-    int previous_digit = -1;
-    int j = 1;
-    for (int i = 1; input[i] != '\0' && j < 4; ++i) {
-        char c = toupper(input[i]);
-        if (c >= 'A' && c <= 'Z') {
-            int index = c - 'A';
-            int digit = soundex_map[index] - '0';
-            if (digit != previous_digit && digit != 0) {
-                output[j++] = '0' + digit;
-                previous_digit = digit;
-            }
-        }
-    }
-    // Pad the output with zeros if necessary
-    while (j < 4) {
-        output[j++] = '0';
-    }
-    output[4] = '\0';
+  // Trivial case 2: even numbers
+  if (n % 2 == 0) return n == 2;
+
+  // Now, we have that n is odd and n >= 3.
+
+  // Try to divide n by every odd number i, starting from 3
+  for (int i = 3;; i += 2) {
+    // We only have to try i up to the square root of n
+    if (i > n / i) break;
+
+    // Now, we have i <= n/i < n.
+    // If n is divisible by i, n is not prime.
+    if (n % i == 0) return false;
+  }
+
+  // n has no integer factor in the range (1, n), and thus is prime.
+  return true;
 }
