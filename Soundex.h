@@ -1,63 +1,48 @@
-#include <stdio.h>
+#ifndef SOUNDEX_H
+#define SOUNDEX_H
+ 
+#include "Soundex.h"
 #include <ctype.h>
-
-// Function to map characters to their Soundex codes
-char get_soundex_code(char c) {
-    static const char *soundex_mapping = "012301200224550321111112131112132211221";
-    if (isalpha(c)) {
-        return soundex_mapping[c - 'A'];
+#include <string.h>
+ 
+char getSoundexCode(char c) {
+    static const char soundexTable[26] = {'0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5','5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
+    };
+    c = toupper(c);
+    if (!isalpha(c))
+    {      
+         return '0';
     }
-    return '0'; // Non-alphabetic characters are mapped to '0'
+     return soundexTable[c - 'A'];
 }
-
-// Function to process the first character and initialize the Soundex code
-void initialize_soundex(const char *input, char *output) {
-    if (input[0] != '\0') {
-        output[0] = toupper(input[0]);
-    } else {
-        output[0] = '0';
-        output[1] = '0';
-        output[2] = '0';
-        output[3] = '\0';
-    }
+ 
+void initializeSoundex(char *soundex, char firstCharacter) {
+    soundex[0] = toupper(firstCharacter);
+    soundex[1] = soundex[2] = soundex[3] = '0';
+    soundex[4] = '\0';
 }
-
-// Function to process the remaining characters of the input string
-void process_characters(const char *input, char *output) {
-    char prev_char_code = '0';
-    int j = 1; // Start after the first letter
-
-    for (int i = 1; input[i] != '\0' && j < 4; ++i) {
-        char c = toupper(input[i]);
-        char char_code = get_soundex_code(c);
-
-        // Skip duplicate codes and '0' (silent letters)
-        if (char_code != '0' && char_code != prev_char_code) {
-            output[j++] = char_code;
-        }
-
-        prev_char_code = char_code;
+ 
+int shouldAddToSoundex(char code, char *soundex, int sIndex) {
+    return sIndex < 4 && code != '0' && code != soundex[sIndex - 1];
+}
+ 
+void processCharacter(const char *name, char *soundex, int *sIndex, int i) {
+    char code = getSoundexCode(name[i]);
+    if (shouldAddToSoundex(code, soundex, *sIndex)) {
+        soundex[*sIndex] = code;
+        (*sIndex)++;
     }
 }
-
-// Function to pad the Soundex code with zeros if necessary
-void pad_soundex(char *output) {
-    while (output[1] != '\0' && output[1] != '0') {
-        output[2] = '0';
-        output[3] = '\0';
+ 
+ 
+void generateSoundex(const char *name, char *soundex) {
+    initializeSoundex(soundex, name[0]);
+    int sIndex = 1;
+    int len = strlen(name);
+    for (int i = 1; i < len; i++) {
+        processCharacter(name, soundex, &sIndex, i);
     }
 }
-
-// Main Soundex function that integrates all the sub-functions
-void generate_soundex(const char *input, char *output) {
-    // Initialize the output with the first character
-    initialize_soundex(input, output);
-
-    // Process the rest of the input string
-    process_characters(input, output);
-
-    // Pad with zeros if the output is less than 4 characters
-    pad_soundex(output);
-}
-
+ 
+#endif // SOUNDEX_H
 
