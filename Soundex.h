@@ -2,7 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 
-void soundex(const char *name, char *s) {
+void generate_soundex(const char *name, char *s) {
     // Soundex mapping table
     char mappings[] = "01230120022455012623010202";
     // Initialize the output string
