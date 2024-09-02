@@ -1,42 +1,63 @@
-#include <string.h>
+#include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
-// Function to encode a single character according to the Soundex rules
-char soundexEncodeChar(char c) {
-    switch (c) {
-        case 'B': case 'F': case 'P': case 'V': return '1';
-        case 'C': case 'G': case 'J': case 'K': case 'Q': case 'S': case 'X': case 'Z': return '2';
-        case 'D': case 'T': return '3';
-        case 'L': return '4';
-        case 'M': case 'N': return '5';
-        case 'R': return '6';
-        default: return '0';  // For vowels and other characters
+// Function to calculate the Soundex code
+void soundex(const char *name, char *result) {
+    // Soundex mapping table
+    const char map[26] = {
+        0, // A
+        1, // B
+        2, // C
+        3, // D
+        0, // E
+        1, // F
+        2, // G
+        0, // H
+        0, // I
+        1, // J
+        2, // K
+        0, // L
+        5, // M
+        5, // N
+        0, // O
+        1, // P
+        2, // Q
+        6, // R
+        2, // S
+        3, // T
+        0, // U
+        1, // V
+        0, // W
+        2, // X
+        0, // Y
+        2  // Z
+    };
+
+    if (name[0] == '\0') {
+        strcpy(result, "0000");
+        return;
     }
-}
 
-// Function to encode a string into its Soundex representation
-void soundexEncode(const char* input, char* output) {
-    // The first character of the Soundex code is the first character of the input
-    output[0] = toupper(input[0]);
-    int outputIndex = 1;
-    
-    char previousCode = soundexEncodeChar(toupper(input[0]));
-    
-    for (int i = 1; input[i] != '\0'; ++i) {
-        char currentChar = toupper(input[i]);
-        char currentCode = soundexEncodeChar(currentChar);
-        
-        if (currentCode != '0' && currentCode != previousCode) {
-            output[outputIndex++] = currentCode;
+    // Result buffer and initialization
+    result[0] = toupper(name[0]); // First letter
+    int index = 1; // Position in result
+
+    char prevCode = map[toupper(name[0]) - 'A']; // Code for the first letter
+
+    for (int i = 1; name[i] != '\0' && index < 4; i++) {
+        char ch = toupper(name[i]);
+        char code = map[ch - 'A'];
+
+        if (code != 0 && code != prevCode) {
+            result[index++] = '0' + code;
         }
-        
-        previousCode = currentCode;
+        prevCode = code;
     }
-    
-    // Fill the rest of the output with '0' to make sure it's 4 characters long
-    while (outputIndex < 4) {
-        output[outputIndex++] = '0';
+
+    // Pad with zeros if needed
+    while (index < 4) {
+        result[index++] = '0';
     }
-    
-    output[4] = '\0';  // Null-terminate the output string
+    result[4] = '\0'; // Null-terminate the string
 }
