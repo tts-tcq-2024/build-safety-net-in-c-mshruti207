@@ -1,63 +1,30 @@
 #include <stdio.h>
-#include <ctype.h>
 #include <string.h>
+#include <ctype.h>
 
-// Function to calculate the Soundex code
-void soundex(const char *name, char *result) {
+void soundex(const char *name, char *s) {
     // Soundex mapping table
-    const char map[26] = {
-        0, // A
-        1, // B
-        2, // C
-        3, // D
-        0, // E
-        1, // F
-        2, // G
-        0, // H
-        0, // I
-        1, // J
-        2, // K
-        0, // L
-        5, // M
-        5, // N
-        0, // O
-        1, // P
-        2, // Q
-        6, // R
-        2, // S
-        3, // T
-        0, // U
-        1, // V
-        0, // W
-        2, // X
-        0, // Y
-        2  // Z
-    };
+    char mappings[] = "01230120022455012623010202";
+    // Initialize the output string
+    s[0] = toupper(name[0]);
+    int si = 1;
 
-    if (name[0] == '\0') {
-        strcpy(result, "0000");
-        return;
-    }
-
-    // Result buffer and initialization
-    result[0] = toupper(name[0]); // First letter
-    int index = 1; // Position in result
-
-    char prevCode = map[toupper(name[0]) - 'A']; // Code for the first letter
-
-    for (int i = 1; name[i] != '\0' && index < 4; i++) {
-        char ch = toupper(name[i]);
-        char code = map[ch - 'A'];
-
-        if (code != 0 && code != prevCode) {
-            result[index++] = '0' + code;
+    // Process each character in the input name
+    for (int i = 1; name[i] != '\0' && si < 4; i++) {
+        char c = toupper(name[i]);
+        if (c >= 'A' && c <= 'Z') {
+            char code = mappings[c - 'A'];
+            if (code != '0' && code != s[si - 1]) {
+                s[si++] = code;
+            }
         }
-        prevCode = code;
     }
 
-    // Pad with zeros if needed
-    while (index < 4) {
-        result[index++] = '0';
+    // Pad with zeros if necessary
+    while (si < 4) {
+        s[si++] = '0';
     }
-    result[4] = '\0'; // Null-terminate the string
+
+    // Null-terminate the string
+    s[si] = '\0';
 }
