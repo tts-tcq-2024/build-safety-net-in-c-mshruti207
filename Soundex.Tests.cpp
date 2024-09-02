@@ -4,6 +4,6 @@
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
  //AAA
   char soundex[5];
-  soundex("AX", soundex);
+  generate_soundex("AX", soundex);
   ASSERT_EQ(soundex,"A200");
 }
