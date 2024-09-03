@@ -50,6 +50,16 @@ void padding_Soundex(char *soundex) {
         
     }
 }
+void checkfirstletteralpha(const char* name, char* soundex){
+int ind=0;
+    max_len=strlen(name);
+if (isalpha(name[ind])< max_len){
+    char check_fir=name[ind];    
+initializeSoundex(soundex, check_fir);}
+else{
+ind++;}
+}
+
 
 // Generate the Soundex code from the given name
 void generateSoundex(const char* name, char* soundex) {
@@ -57,8 +67,8 @@ void generateSoundex(const char* name, char* soundex) {
         soundex[0] = '\0';
         return;
     }
-   
-    initializeSoundex(soundex, name[0]);
+    checkfirstletteralpha(const char* name, char* soundex)
+   // initializeSoundex(soundex, name[0]);
     processCharacters(name, soundex);
     padding_Soundex(soundex);
 }
