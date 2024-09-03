@@ -28,13 +28,20 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
 //AAA
   char soundex[5];
   generateSoundex("1234", soundex);
-ASSERT_STREQ(soundex,"");
+ASSERT_STREQ(soundex,"000");
 }
  
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
 //AAA
   char soundex[5];
   generateSoundex("Shr@12n", soundex);
+ASSERT_STREQ(soundex,"S650");
+}
+
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_51) {
+//AAA
+  char soundex[5];
+  generateSoundex("@shr12n", soundex);
 ASSERT_STREQ(soundex,"S650");
 }
 //Replace all adjacent same digits with one digit
