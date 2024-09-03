@@ -51,20 +51,23 @@ void padding_Soundex(char *soundex) {
     }
 }
 
-void initializeWithFirstAlpha(const char* name, char* soundex) {
-    // Use pointer arithmetic to find the first valid alphabetic character
+const char* findFirstAlpha(const char* name) {
     while (*name && !isalpha((unsigned char)*name)) {
         name++;
     }
+    return name;
+}
+void initializeWithFirstAlpha(const char* name, char* soundex) {
+    //  Find the first valid alphabetic character
+    const char* firstAlpha = findFirstAlpha(name);
 
-    // Check if we have found a valid alphabetic character
-    if (*name) {
-        initializeSoundex(soundex, *name);
+    //  Check if we found a valid character and initialize soundex
+    if (*firstAlpha) {
+        initializeSoundex(soundex, *firstAlpha);
     } else {
         soundex[0] = '\0'; // No valid alphabetic character found
     }
 }
-
 // Generate the Soundex code from the given name
 void generateSoundex(const char* name, char* soundex) {
     if (name == NULL || name[0] == '\0') {
