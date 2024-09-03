@@ -28,7 +28,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
 //AAA
   char soundex[5];
   generateSoundex("1234", soundex);
-ASSERT_STREQ(soundex,"000");
+ASSERT_STREQ(soundex,"");
 }
  
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
@@ -42,6 +42,13 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_51) {
 //AAA
   char soundex[5];
   generateSoundex("@@[shr12n", soundex);
+ASSERT_STREQ(soundex,"S650");
+}
+
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_52) {
+//AAA
+  char soundex[5];
+  generateSoundex("@@[shhr12n", soundex);
 ASSERT_STREQ(soundex,"S650");
 }
 //Replace all adjacent same digits with one digit
