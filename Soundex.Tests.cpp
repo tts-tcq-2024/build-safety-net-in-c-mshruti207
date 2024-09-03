@@ -30,7 +30,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
 }
 
 //Test case to check special character or numeric at starting
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_51) {
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
 //AAA
  char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("@@[shr12n", soundex);
@@ -40,7 +40,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_51) {
 }
 
 //Replace all adjacent same digits with one digit
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_6) {
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
 //AAA
   char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("Abfp", soundex);
@@ -48,7 +48,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_6) {
 }
  
 //two letters with the same number separated by 'h', 'w' or 'y' are coded as a single number
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_6) {
 //AAA
  char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("BShZ", soundex);
@@ -58,7 +58,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
 }
 
 //Test case to check Empty 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_9) {
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
 //AAA
   char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("", soundex);
