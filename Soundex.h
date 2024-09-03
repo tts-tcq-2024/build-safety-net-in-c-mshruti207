@@ -38,7 +38,6 @@ void processCharacters(const char* name, char* soundex, int* index) {
 
     for (int i = *(index) + 1 ; name[i] && sIndex < MAX_CODE_LENGTH; i++) {
         char code = getSoundexCode(toupper(name[i]));
-        if (code != '0') { // Only consider valid codes
             addSoundexCode(soundex, &sIndex, code);
         }
     }
