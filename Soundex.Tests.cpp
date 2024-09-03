@@ -54,14 +54,14 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
 }
 
 //Test case to check NULL or Empty 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_8) {
 //AAA
   char soundex[5];
   generateSoundex("", soundex);
   ASSERT_STREQ(soundex,"");
 }
 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_9) {
 //AAA
   char soundex[5];
   generateSoundex("NULL", soundex);
