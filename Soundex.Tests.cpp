@@ -49,5 +49,18 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
 //AAA
   char soundex[5];
   generateSoundex("BShZ", soundex);
-  ASSERT_STREQ(soundex,"B220");
+  ASSERT_STREQ(soundex,"B200");
+}
+//Test case to check NULL or Empty 
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
+//AAA
+  char soundex[5];
+  generateSoundex("", soundex);
+  ASSERT_STREQ(soundex,"");
+}
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
+//AAA
+  char soundex[5];
+  generateSoundex("NULL", soundex);
+  ASSERT_STREQ(soundex,"");
 }
