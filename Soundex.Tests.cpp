@@ -41,7 +41,7 @@ ASSERT_STREQ(soundex,"S650");
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_51) {
 //AAA
   char soundex[5];
-  generateSoundex("@shr12n", soundex);
+  generateSoundex("@@[shr12n", soundex);
 ASSERT_STREQ(soundex,"S650");
 }
 //Replace all adjacent same digits with one digit
