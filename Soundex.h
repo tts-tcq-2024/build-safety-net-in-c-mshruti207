@@ -17,13 +17,6 @@ char getSoundexCode(char c) {
     return '0'; // Non-alphabetic characters are mapped to '0'
 }
 
-// Initialize the Soundex code with the first letter and default values
-void initializeSoundex(char* soundex, char firstLetter) {
-    soundex[0] = toupper(firstLetter);
-    for (int i = 1; i < MAX_CODE_LENGTH; i++) {
-        soundex[i] = '0';
-    }
-}
 
 // Add a Soundex code to the result if it's valid and different from the last code
 void addSoundexCode(char* soundex, int* sIndex, char code) {
@@ -43,13 +36,12 @@ void processCharacters(const char* name, char* soundex, int* index) {
     
 }
 
-// Pad the Soundex code if necessary
-void padding_Soundex(char *soundex) {
-    int len = strlen(soundex);
-    while (len < MAX_CODE_LENGTH - 1) { // -1 because the last position is for '\0'
-        soundex[len++] = '0';
+// Initialize the Soundex code with the first letter and default values
+void initializeSoundex(char* soundex, char firstLetter) {
+    soundex[0] = toupper(firstLetter);
+    for (int i = 1; i < MAX_CODE_LENGTH; i++) {
+        soundex[i] = '0';
     }
-    soundex[len] = '\0'; // Ensure null termination
 }
 
 // Find the first valid alphabetic character
@@ -58,21 +50,30 @@ int findFirstAlpha(const char* name) {
     while (name[index] && !isalpha((unsigned char)name[index])) {
         index++;
     }
-    return index; // Return index or -1 if no valid character is found
+    return index; 
 }
 
-// Initialize with the first valid alphabetic character
+// Initialize with the first valid alphabetic character 
 void initializeWithFirstAlpha(const char* name, char* soundex) {
     int index = findFirstAlpha(name);
 
     if (index != -1) {
         // Initialize with the first valid alphabetic character
         initializeSoundex(soundex, name[index]);
-        // Move the pointer to the position of the first valid character
+       //proccess character after first valid alphabet encounter
         processCharacters(name, soundex, &index);
     } else {
         soundex[0] = '\0'; // No valid alphabetic character found
     }
+}
+
+// Pad the Soundex code if necessary
+void padding_Soundex(char *soundex) {
+    int len = strlen(soundex);
+    while (len < MAX_CODE_LENGTH - 1) { // -1 because the last position is for '\0'
+        soundex[len++] = '0';
+    }
+    soundex[len] = '\0'; // Ensure null termination
 }
 
 // Generate the Soundex code from the given name
