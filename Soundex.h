@@ -21,7 +21,7 @@ char getSoundexCode(char c) {
 // Initialize the Soundex code with the first letter and default values
 void initializeSoundex(char* soundex, char firstLetter) {
     soundex[0] = toupper(firstLetter);
-    for (int i = 1; i < MAX_CODE_LENGTH + 1; i++) {
+    for (int i = 1; i < MAX_CODE_LENGTH; i++) {
         soundex[i] = '0';
     }
    }
