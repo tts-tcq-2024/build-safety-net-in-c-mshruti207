@@ -67,7 +67,7 @@ void generateSoundex(const char* name, char* soundex) {
         soundex[0] = '\0';
         return;
     }
-    checkfirstletteralpha( name, soundex)
+    checkfirstletteralpha( name, soundex);
    // initializeSoundex(soundex, name[0]);
     processCharacters(name, soundex);
     padding_Soundex(soundex);
