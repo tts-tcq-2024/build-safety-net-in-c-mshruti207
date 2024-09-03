@@ -33,10 +33,10 @@ void addSoundexCode(char* soundex, int* sIndex, char code) {
 }
 
 // Process the remaining characters of the name to generate the Soundex code
-void processCharacters(const char* name, char* soundex) {
-    int sIndex = 1; // Start adding codes after the first letter
+void processCharacters(const char* name, char* soundex, int* index) {
+   
 
-    for (int i = 1; name[i] && sIndex < MAX_CODE_LENGTH; i++) {
+    for (int i = *(index) + 1 ; name[i] < MAX_CODE_LENGTH; i++) {
         char code = getSoundexCode(toupper(name[i]));
         if (code != '0') { // Only consider valid codes
             addSoundexCode(soundex, &sIndex, code);
@@ -54,21 +54,23 @@ void padding_Soundex(char *soundex) {
 }
 
 // Find the first valid alphabetic character
-const char* findFirstAlpha(const char* name) {
-    while (*name && !isalpha((unsigned char)*name)) {
-        name++;
+int findFirstAlpha(const char* name) {
+    int index = 0;
+    while (name[index] && !isalpha((unsigned char)name[index])) {
+        index++;
     }
-    return name;
+    return name[index] ? index : -1; // Return index or -1 if no valid character is found
 }
 
 // Initialize with the first valid alphabetic character
 void initializeWithFirstAlpha(const char* name, char* soundex) {
-    const char* firstAlpha = findFirstAlpha(name);
+    int index = findFirstAlpha(name);
 
-    // Check if we found a valid character and initialize soundex
-    if (*firstAlpha) {
-        initializeSoundex(soundex, *firstAlpha);
-        processCharacters(firstAlpha, soundex);
+    if (index != -1) {
+        // Initialize with the first valid alphabetic character
+        initializeSoundex(soundex, name[index]);
+        // Move the pointer to the position of the first valid character
+        processCharacters(name, soundex, &index);
     } else {
         soundex[0] = '\0'; // No valid alphabetic character found
     }
