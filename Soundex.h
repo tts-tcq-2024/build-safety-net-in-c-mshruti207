@@ -12,11 +12,11 @@ char getSoundexCode(char c) {
         '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
     };
    c = toupper(c);
-    if (!isalpha(c))
+    if (isalpha(c))
     {      
-         return '0';
+         return soundexTable[c - 'A'];
     }
-   return soundexTable[c - 'A']; // Non-alphabetic characters are mapped to '0'
+   return 0; // Non-alphabetic characters are mapped to '0'
 }
 
 // Initialize the Soundex code with the first letter and default values
