@@ -66,6 +66,7 @@ void initializeWithFirstAlpha(const char* name, char* soundex) {
     //  Check if we found a valid character and initialize soundex
     if (*firstAlpha) {
         initializeSoundex(soundex, *firstAlpha);
+         processCharacters(name, soundex );
     } else {
         soundex[0] = '\0'; // No valid alphabetic character found
     }
@@ -77,8 +78,8 @@ void generateSoundex(const char* name, char* soundex) {
         return;
     }
     initializeWithFirstAlpha( name, soundex);
-   // initializeSoundex(soundex, name[0]);
-    processCharacters(name, soundex);
+   
+   
     padding_Soundex(soundex);
 }
 
