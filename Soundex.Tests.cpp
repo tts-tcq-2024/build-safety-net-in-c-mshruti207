@@ -16,7 +16,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_2) {
   ASSERT_STREQ(soundex,"A231");
 }
  
-//Test case to check special character
+//Test case to check special character or entire numeric
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
 //AAA
   char soundex[5];
@@ -27,8 +27,8 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
 //AAA
   char soundex[5];
-  generateSoundex("@12Mon", soundex);
-ASSERT_STREQ(soundex,"M500");
+  generateSoundex("1234", soundex);
+ASSERT_STREQ(soundex,"");
 }
  
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
@@ -52,18 +52,19 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
   generateSoundex("BShZ", soundex);
   ASSERT_STREQ(soundex,"B200");
 }
-
-//Test case to check NULL or Empty 
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_8) {
+//AAA
+  char soundex[5];
+  generateSoundex("lgwxnm", soundex);
+  ASSERT_STREQ(soundex,"B200");
+}
+
+//Test case to check Empty 
+TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_9) {
 //AAA
   char soundex[5];
   generateSoundex("", soundex);
   ASSERT_STREQ(soundex,"");
 }
 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_9) {
-//AAA
-  char soundex[5];
-  generateSoundex("NULL", soundex);
-  ASSERT_STREQ(soundex,"");
-}
+
