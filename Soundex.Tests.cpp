@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "Soundex.h"
  
-//Append 3 zeros if result contains less than 3 digits
+//Append zeros if result contains less than 3 digits
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
 //AAA
   char soundex[5];
@@ -16,7 +16,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_2) {
   ASSERT_STREQ(soundex,"A231");
 }
  
-//Test case to ckeck special character
+//Test case to check special character
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
 //AAA
   char soundex[5];
@@ -26,8 +26,8 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
 //AAA
   char soundex[5];
-  generateSoundex("ACGJ", soundex);
-ASSERT_STREQ(soundex,"A200");
+  generateSoundex("@12Mon", soundex);
+ASSERT_STREQ(soundex,"M500");
 }
  
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
