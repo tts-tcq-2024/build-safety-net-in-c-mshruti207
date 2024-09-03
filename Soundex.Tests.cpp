@@ -56,7 +56,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_8) {
 //AAA
   char soundex[5];
   generateSoundex("lgwxnm", soundex);
-  ASSERT_STREQ(soundex,"B200");
+  ASSERT_STREQ(soundex,"L250");
 }
 
 //Test case to check Empty 
