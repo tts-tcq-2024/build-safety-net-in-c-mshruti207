@@ -40,7 +40,7 @@ void processCharacters(const char* name, char* soundex, int* index) {
         char code = getSoundexCode(toupper(name[i]));
             addSoundexCode(soundex, &sIndex, code);
         }
-    }
+    
 }
 
 // Pad the Soundex code if necessary
