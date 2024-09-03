@@ -23,6 +23,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
   generateSoundex("A[", soundex);
   ASSERT_STREQ(soundex,"A000");
 }
+
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
 //AAA
   char soundex[5];
@@ -51,6 +52,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
   generateSoundex("BShZ", soundex);
   ASSERT_STREQ(soundex,"B200");
 }
+
 //Test case to check NULL or Empty 
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
 //AAA
@@ -58,6 +60,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
   generateSoundex("", soundex);
   ASSERT_STREQ(soundex,"");
 }
+
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
 //AAA
   char soundex[5];
