@@ -21,15 +21,14 @@ char getSoundexCode(char c) {
 // Initialize the Soundex code with the first letter and default values
 void initializeSoundex(char* soundex, char firstLetter) {
     soundex[0] = toupper(firstLetter);
-    for (int i = 1; i < MAX_CODE_LENGTH; i++) {
+    for (int i = 1; i < MAX_CODE_LENGTH + 1; i++) {
         soundex[i] = '0';
     }
-    soundex[MAX_CODE_LENGTH] = '\0'; // Null-terminate the string
-}
+   }
 
 // Add a Soundex code to the result if it's valid and different from the last code
-void addSoundexCode(char* soundex, int* sIndex, char code, char lastCode) {
-    if (code != '0' && code != lastCode) {
+void addSoundexCode(char* soundex, int* sIndex, char code) {
+    if (code != '0' && code != soundex[sIndex - 1]) {
         soundex[(*sIndex)++] = code;
     }
 }
@@ -41,8 +40,8 @@ void processCharacters(const char* name, char* soundex) {
 
     for (int i = 1; name[i] && sIndex < MAX_CODE_LENGTH; i++) {
         char code = getSoundexCode(toupper(name[i]));
-        addSoundexCode(soundex, &sIndex, code, lastCode);
-        lastCode = code; // Update lastCode
+        addSoundexCode(soundex, &sIndex, code);
+      
     }
 }
 
@@ -61,7 +60,7 @@ void generateSoundex(const char* name, char* soundex) {
         soundex[0] = '\0';
         return;
     }
-
+   
     initializeSoundex(soundex, name[0]);
     processCharacters(name, soundex);
     padding_Soundex(soundex);
