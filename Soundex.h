@@ -58,7 +58,7 @@ int findFirstAlpha(const char* name) {
     while (name[index] && !isalpha((unsigned char)name[index])) {
         index++;
     }
-    return name[index] ? index : -1; // Return index or -1 if no valid character is found
+    return index; // Return index or -1 if no valid character is found
 }
 
 // Initialize with the first valid alphabetic character
