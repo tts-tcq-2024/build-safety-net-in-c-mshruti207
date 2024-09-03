@@ -28,7 +28,7 @@ void initializeSoundex(char* soundex, char firstLetter) {
 
 // Add a Soundex code to the result if it's valid and different from the last code
 void addSoundexCode(char* soundex, int* sIndex, char code) {
-    if (code != '0' && code != soundex[sIndex - 1]) {
+    if (code != '0' && code != soundex[*sIndex - 1]) {
         soundex[(*sIndex)++] = code;
     }
 }
