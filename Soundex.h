@@ -11,14 +11,11 @@ char getSoundexCode(char c) {
     static const char soundexTable[26] = {
         '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
     };
-   c = toupper(c);
-    if (!isalpha(c))
-    {      
-        return 0;  
+  if (c >= 'A' && c <= 'Z') {
+        return soundexTable[c - 'A'];
     }
-  return soundexTable[c - 'A']; // Non-alphabetic characters are mapped to '0'
+    return '0'; // Non-alphabetic characters are mapped to '0'
 }
-
 // Initialize the Soundex code with the first letter and default values
 void initializeSoundex(char* soundex, char firstLetter) {
     soundex[0] = toupper(firstLetter);
@@ -50,7 +47,7 @@ void padding_Soundex(char *soundex) {
     int len = strlen(soundex);
     while (len < MAX_CODE_LENGTH - 1) { // -1 because the last position is for '\0'
         soundex[len++] = '0';
-        soundex[len] = '\0'; // Ensure null-termination
+        
     }
 }
 
