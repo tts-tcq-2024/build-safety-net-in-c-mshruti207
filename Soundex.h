@@ -34,9 +34,9 @@ void addSoundexCode(char* soundex, int* sIndex, char code) {
 
 // Process the remaining characters of the name to generate the Soundex code
 void processCharacters(const char* name, char* soundex, int* index) {
-   
+   int sIndex=1;
 
-    for (int i = *(index) + 1 ; name[i] < MAX_CODE_LENGTH; i++) {
+    for (int i = *(index) + 1 ; name[i] && sIndex < MAX_CODE_LENGTH; i++) {
         char code = getSoundexCode(toupper(name[i]));
         if (code != '0') { // Only consider valid codes
             addSoundexCode(soundex, &sIndex, code);
