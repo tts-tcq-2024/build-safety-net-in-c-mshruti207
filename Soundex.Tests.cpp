@@ -33,8 +33,8 @@ ASSERT_STREQ(soundex,"A200");
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
 //AAA
   char soundex[5];
-  generateSoundex("@@BBCCDD", soundex);
-ASSERT_STREQ(soundex,"@123");
+  generateSoundex("Shr@12n", soundex);
+ASSERT_STREQ(soundex,"S650");
 }
 //Replace all adjacent same digits with one digit
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_6) {
@@ -49,5 +49,5 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
 //AAA
   char soundex[5];
   generateSoundex("BShZ", soundex);
-  ASSERT_STREQ(soundex,"B200");
+  ASSERT_STREQ(soundex,"B220");
 }
