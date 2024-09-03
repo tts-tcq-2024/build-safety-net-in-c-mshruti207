@@ -46,20 +46,26 @@ void processCharacters(const char* name, char* soundex) {
     }
 }
 
+ // Pad the Soundex code if necessary
+void padding_Soundex(char *soundex) {
+    while (strlen(soundex) < MAX_CODE_LENGTH) {
+        strcat(soundex, "0");
+    }
+}
+
 // Generate the Soundex code from the given name
 void generateSoundex(const char* name, char* soundex) {
-    if (!name || !name[0]) {
+    if (name[0] == '\0')  {
         soundex[0] = '\0';
         return;
     }
 
     initializeSoundex(soundex, name[0]);
     processCharacters(name, soundex);
+    padding_Soundex(soundex);
 
-    // Pad the Soundex code if necessary
-    while (strlen(soundex) < MAX_CODE_LENGTH) {
-        strcat(soundex, "0");
-    }
+   
+    
 }
 
 #endif // SOUNDEX_H
