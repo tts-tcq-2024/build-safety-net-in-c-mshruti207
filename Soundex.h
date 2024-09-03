@@ -8,9 +8,7 @@
 
 // Maps each letter to its Soundex code
 char getSoundexCode(char c) {
-    static const char soundexTable[26] = {
-        '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
-    };
+    static const char soundexTable[26] = { '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'  };
     if (c >= 'A' && c <= 'Z') {
         return soundexTable[c - 'A'];
     }
@@ -32,8 +30,7 @@ void processCharacters(const char* name, char* soundex, int* index) {
     for (int i = *(index) + 1 ; name[i] && sIndex < MAX_CODE_LENGTH; i++) {
         char code = getSoundexCode(toupper(name[i]));
             addSoundexCode(soundex, &sIndex, code);
-        }
-    
+        }    
 }
 
 // Initialize the Soundex code with the first letter and default values
@@ -56,12 +53,9 @@ int findFirstAlpha(const char* name) {
 // Initialize with the first valid alphabetic character 
 void initializeWithFirstAlpha(const char* name, char* soundex) {
     int index = findFirstAlpha(name);
-
-    if (index != -1) {
-        // Initialize with the first valid alphabetic character
-        initializeSoundex(soundex, name[index]);
-       //proccess character after first valid alphabet encounter
-        processCharacters(name, soundex, &index);
+    if (index != -1) {        
+        initializeSoundex(soundex, name[index]);  // Initialize with the first valid alphabetic character       
+        processCharacters(name, soundex, &index); //proccess character after first valid alphabet encounter
     } else {
         soundex[0] = '\0'; // No valid alphabetic character found
     }
@@ -85,6 +79,5 @@ void generateSoundex(const char* name, char* soundex) {
     initializeWithFirstAlpha(name, soundex);
     padding_Soundex(soundex);
 }
-
 
 #endif // SOUNDEX_H
