@@ -57,8 +57,10 @@ const char* findFirstAlpha(const char* name) {
     }
     return name;
 }
+
+  //  Find the first valid alphabetic character
 void initializeWithFirstAlpha(const char* name, char* soundex) {
-    //  Find the first valid alphabetic character
+  
     const char* firstAlpha = findFirstAlpha(name);
 
     //  Check if we found a valid character and initialize soundex
