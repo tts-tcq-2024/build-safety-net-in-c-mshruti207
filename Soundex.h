@@ -1,48 +1,65 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
- 
-#include "Soundex.h"
+
 #include <ctype.h>
 #include <string.h>
- 
-char getSoundexCode(char c) {
-    static const char soundexTable[26] = {'0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5','5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
-    };
-    c = toupper(c);
-    if (!isalpha(c))
-    {      
-         return '0';
-    }
-     return soundexTable[c - 'A'];
-}
- 
-void initializeSoundex(char *soundex, char firstCharacter) {
-    soundex[0] = toupper(firstCharacter);
-    soundex[1] = soundex[2] = soundex[3] = '0';
-    soundex[4] = '\0';
-}
- 
-int shouldAddToSoundex(char code, char *soundex, int sIndex) {
-    return sIndex < 4 && code != '0' && code != soundex[sIndex - 1];
-}
- 
-void processCharacter(const char *name, char *soundex, int *sIndex, int i) {
-    char code = getSoundexCode(name[i]);
-    if (shouldAddToSoundex(code, soundex, *sIndex)) {
-        soundex[*sIndex] = code;
-        (*sIndex)++;
-    }
-}
- 
- 
-void generateSoundex(const char *name, char *soundex) {
-    initializeSoundex(soundex, name[0]);
-    int sIndex = 1;
-    int len = strlen(name);
-    for (int i = 1; i < len; i++) {
-        processCharacter(name, soundex, &sIndex, i);
-    }
-}
- 
-#endif // SOUNDEX_H
 
+#define MAX_CODE_LENGTH 4
+
+// Maps each letter to its Soundex code
+char getSoundexCode(char c) {
+    static const char soundexTable[26] = {
+        '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '3', '1', '1', '0', '2', '2', '3', '2', '3', '0', '1', '0', '2', '0', '2'
+    };
+
+    if (c >= 'A' && c <= 'Z') {
+        return soundexTable[c - 'A'];
+    }
+    return '0'; // Non-alphabetic characters are mapped to '0'
+}
+
+// Initialize the Soundex code with the first letter and default values
+void initializeSoundex(char* soundex, char firstLetter) {
+    soundex[0] = toupper(firstLetter);
+    for (int i = 1; i < MAX_CODE_LENGTH; i++) {
+        soundex[i] = '0';
+    }
+    soundex[MAX_CODE_LENGTH] = '\0'; // Null-terminate the string
+}
+
+// Add a Soundex code to the result if it's valid and different from the last code
+void addSoundexCode(char* soundex, int* sIndex, char code, char lastCode) {
+    if (code != '0' && code != lastCode) {
+        soundex[(*sIndex)++] = code;
+    }
+}
+
+// Process the remaining characters of the name to generate the Soundex code
+void processCharacters(const char* name, char* soundex) {
+    int sIndex = 1; // Start adding codes after the first letter
+    char lastCode = '0'; // Initialize to '0' (no previous code)
+
+    for (int i = 1; name[i] && sIndex < MAX_CODE_LENGTH; i++) {
+        char code = getSoundexCode(toupper(name[i]));
+        addSoundexCode(soundex, &sIndex, code, lastCode);
+        lastCode = code; // Update lastCode
+    }
+}
+
+// Generate the Soundex code from the given name
+void generateSoundex(const char* name, char* soundex) {
+    if (!name || !name[0]) {
+        soundex[0] = '\0';
+        return;
+    }
+
+    initializeSoundex(soundex, name[0]);
+    processCharacters(name, soundex);
+
+    // Pad the Soundex code if necessary
+    while (strlen(soundex) < MAX_CODE_LENGTH) {
+        strcat(soundex, "0");
+    }
+}
+
+#endif // SOUNDEX_H
