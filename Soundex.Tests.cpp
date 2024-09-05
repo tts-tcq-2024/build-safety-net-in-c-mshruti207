@@ -2,7 +2,7 @@
 #include "Soundex.h"
  
 //Append zeros if result contains less than 3 digits
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
+TEST(SoudexTestsuite, pad_zeros_for_onecharacter) {
 //AAA
   char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("AX", soundex);
@@ -10,7 +10,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
 }
 
 //skip numeric and replace consonants with appropriate digit
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_2) {
+TEST(SoudexTestsuite, Skipnumeric_ReplacesConsonantsWithAppropriateDigits) {
 //AAA
   char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("A1CDFe", soundex);
@@ -18,7 +18,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_2) {
 }
  
 //Test case to check special character or entire numeric
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
+TEST(SoudexTestsuite, Check_specialcharacter_numeric) {
 //AAA
  char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("A[", soundex);
@@ -30,7 +30,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
 }
 
 //Test case to check special character or numeric at starting
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
+TEST(SoudexTestsuite, check_specialcharacter_numeric_starting) {
 //AAA
  char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("@@[shr12n", soundex);
@@ -40,7 +40,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_4) {
 }
 
 //Replace all adjacent same digits with one digit
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
+TEST(SoudexTestsuite, Replace_adjacentdigits_with_onedigit) {
 //AAA
   char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("Abfp", soundex);
@@ -48,7 +48,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_5) {
 }
  
 //two letters with the same number separated by 'h', 'w' or 'y' are coded as a single number
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_6) {
+TEST(SoudexTestsuite, Replaces_singlenumber_separatedbyhwy) {
 //AAA
  char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("BShZ", soundex);
@@ -58,7 +58,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_6) {
 }
 
 //Test case to check Empty 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_7) {
+TEST(SoudexTestsuite, Empty_check) {
 //AAA
   char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("", soundex);
