@@ -12,7 +12,7 @@ TEST_P(SoundexTest, SoundexFunctionTest) {
     std::tie(input, expected) = GetParam();
 
     char result[5];  // 4 characters + null terminator
-    soundex(input.c_str(), result);
+    generateSoundex(input.c_str(), result);
 
     EXPECT_EQ(expected, result);
 }
