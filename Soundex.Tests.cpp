@@ -1,26 +1,20 @@
 #include <gtest/gtest.h>
-#include "Soundex.h"
+#include <cstring>
+#include "Soundex.h"  // Include your Soundex header file
 
-// Test fixture for parameterized Soundex tests
 class SoundexTest : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {
 };
 
-// Parameterized test case
-TEST_Soundex(SoundexTest, SoundexFunctionTest) {
-    std::string input;
-    std::string expected;
-    std::tie(input, expected) = GetParam();
-
-    char result[5];  // 4 characters + null terminator
-    generateSoundex(input.c_str(), result);
-
-    EXPECT_EQ(expected, result);
+TEST_P(SoundexTest, CorrectSoundexEncoding) {
+    auto [input, expected] = GetParam();
+    char result[SOUND_EX_MAX_LENGTH + 1];
+    generatesoundex(input.c_str(), result);
+    EXPECT_EQ(expected, std::string(result));
 }
 
-// Instantiate the test with different parameter sets
 INSTANTIATE_TEST_SUITE_P(
-    Default,  // Name of the test suite
-    SoundexTest,  // Test fixture class
+    SoundexTests,
+    SoundexTest,
     ::testing::Values(
         std::make_tuple("A", "A000"),
         std::make_tuple("A1CDFe", "A231"),
