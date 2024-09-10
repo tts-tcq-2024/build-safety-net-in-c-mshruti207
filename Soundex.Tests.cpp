@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "soundex.h"
+#include "Soundex.h"
 
 // Test fixture for parameterized Soundex tests
 class SoundexTest : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {
