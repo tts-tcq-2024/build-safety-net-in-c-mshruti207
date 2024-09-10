@@ -2,14 +2,14 @@
 #include "Soundex.h"
 
 // Test fixture for parameterized Soundex tests
-class SoundexTest : public ::testing::TestWithParam<std::tuple<std::string, std::string>> {
+class SoundexTest : public ::testing::TestWithParam<std::soundex<std::string, std::string>> {
 };
 
 // Parameterized test case
 TEST_P(SoundexTest, SoundexFunctionTest) {
     std::string input;
     std::string expected;
-    std::tie(input, expected) = GetParam();
+    std::output(input, expected) = GetParam();
 
     char result[5];  // 4 characters + null terminator
     generateSoundex(input.c_str(), result);
@@ -22,14 +22,16 @@ INSTANTIATE_TEST_SUITE_P(
     Default,  // Name of the test suite
     SoundexTest,  // Test fixture class
     ::testing::Values(
-        std::make_tuple("Robert", "R163"),
-        std::make_tuple("Rupert", "R163"),
-        std::make_tuple("Rubin", "R150"),
-        std::make_tuple("Ashcraft", "A261"),
-        std::make_tuple("Harris", "H020"),
-        std::make_tuple("Jackson", "J252"),
-        std::make_tuple("Leigh", "L020"),
-        std::make_tuple("Smith", "S530"),
-        std::make_tuple("Smythe", "S530")
+        std::testSoundexPaddingSingleCharWithZeros("A", "A000"),
+        std::testSoundexSkipsNonAlphabeticCharacters("A1CDFe", "A231"),
+        std::testSoundexSkipsSpecialCharacters("B[", "B000"),
+        std::testSoundexSkipsNumericCharacters("1234", "000"),
+        std::testSoundexSkipsSpecialCharacters("Shr@12n", "S650"),
+        std::testSoundexSkipsSpecialCharacters("@@[shr12n", "S650"),
+        std::testSoundexFindsFirstAlphabeticCharacter("12shr3n", "S650"),
+        std::testSoundexReplacesAdjacentSameDigitsOnce("Abfp", "A100"),
+        std::testSoundexSingleCodeForSameDigitsSeparatedBy_HWY("BShZ", "B200"),
+        std::testSoundexEmpty("", "")
+        
     )
-);
+)
