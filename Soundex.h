@@ -60,7 +60,7 @@ void FindFirstAlphabeticCharacter(const char* name, char* soundex) {
 
 void padding_Soundex(char *soundex) {
     int len = strlen(soundex);
-    while (len < MAX_CODE_LENGTH - 1) 
+    while (len < MAX_CODE_LENGTH - 1) {
         soundex[len++] = '0';
     }
     soundex[len] = '\0'; 
