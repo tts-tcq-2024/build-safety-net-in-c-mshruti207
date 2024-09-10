@@ -7,8 +7,8 @@ class SoundexTest : public ::testing::TestWithParam<std::tuple<std::string, std:
 
 TEST_P(SoundexTest, CorrectSoundexEncoding) {
     auto [input, expected] = GetParam();
-    char result[SOUND_EX_MAX_LENGTH + 1];
-    generatesoundex(input.c_str(), result);
+    char result[MAX_CODE_LENGTH + 1];
+    generateSoundex(input.c_str(), result);
     EXPECT_EQ(expected, std::string(result));
 }
 
