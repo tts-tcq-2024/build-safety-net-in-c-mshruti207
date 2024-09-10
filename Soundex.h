@@ -51,19 +51,19 @@ int findFirstAlphabetic_char(const char* name) {
 void FindFirstAlphabeticCharacter(const char* name, char* soundex) {
     int index = findFirstAlphabetic_char(name);
     if (index != -1) {        
-        initializeSoundex(soundex, name[index]);  // Initialize with the first valid alphabetic character       
-        processCharacters(name, soundex, &index); //proccess character after first valid alphabet encounter
+        initializeSoundex(soundex, name[index]);  
+        processCharacters(name, soundex, &index); 
     } else {
-        soundex[0] = '\0'; // No valid alphabetic character found
+        soundex[0] = '\0'; 
     }
 }
 
 void padding_Soundex(char *soundex) {
     int len = strlen(soundex);
-    while (len < MAX_CODE_LENGTH - 1) { // -1 because the last position is for '\0'
+    while (len < MAX_CODE_LENGTH - 1) 
         soundex[len++] = '0';
     }
-    soundex[len] = '\0'; // Ensure null termination
+    soundex[len] = '\0'; 
 }
 
 void generateSoundex(const char* name, char* soundex) {
