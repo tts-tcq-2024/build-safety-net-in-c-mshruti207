@@ -18,7 +18,7 @@ TEST(SoudexTestsuite, SkipNumericsAndReplaceConsanantsWithDigitCode) {
 }
  
 //Test case to check special character or entire numeric
-TEST(SoudexTestsuite, SkipSpecialCharacterNumericAndReplaceConsanantsWithDigitCode) {
+TEST(SoudexTestsuite, TestCheckSkipSpecialCharacterAndNumeric) {
 //AAA
  char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("A[", soundex);
