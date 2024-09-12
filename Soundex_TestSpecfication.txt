@@ -1,0 +1,42 @@
+Soundex Algorithm Test Specification
+
+Objective:
+The goal of this test is to validate that the generateSoundex function accurately produces the Soundex code for a diverse range of input strings. The testing will ensure that the function correctly handles standard cases,inputs with special characters or numeric and empty case while strictly following the Soundex algorithm rules.
+
+Public interface: gerenateSoundex
+
+Test Scenario 1: Verify if zeros are appended for Single character
+Testcase Name:PadZerosForSingleCharacter
+Input:AX
+Expected Output:A200
+
+Test Scenario 2: Verify if numerics are ignored and replaced consonants with appropriate digit code
+Testcase Name:SkipNumericsAndReplaceConsanantsWithDigitCode
+Input:A1CDFe
+Expected Output:A231
+
+Test Scenario 3: Verify if numerics and special characters are ignored and replaced consonants with appropriate digit code
+Testcase Name:TestCheckSkipSpecialCharacterAndNumeric
+Input:Shr[@12n
+Expected Output:S650
+  
+Test Scenario 4: Verify if numerics and special character are ignored at the start and replaced consonants with appropriate digit code
+Testcase Name:TestCheckSpecialCharacterAndNumericAtStarting
+Input:@@[shr12n
+Expected Output:S650
+  
+Test Scenario 5: Verify if all adjacent same digits are replaced only once
+Testcase Name:TestCheckReplaceAdjacentSameDigitsOnce
+Input:Abfp
+Expected Output:A100
+  
+Test Scenario 6: Verify if two letters with the same number separated by 'h', 'w' or 'y' are coded as a single number
+Testcase Name:TestCheckReplaceWithSinglenumberSeparatedBy_HWY
+Input:AX
+Expected Output:A200
+  
+Test Scenario 7: Test case to check Empty
+Testcase Name:TestCheckEmptyCharacter
+Input:""
+Output:""
+
